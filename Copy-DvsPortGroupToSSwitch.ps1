@@ -71,7 +71,7 @@ Process {
         break
     }
 
-    $AllEsxis = $ClusterInfo | Get-VMhost
+    $AllEsxis = $ClusterInfo | Get-VMhost | Where-Object {$_.ConnectionState -eq 'Connected' -or $_.ConnectionState -eq 'Maintenance'}
     $DvPortGroupInfo = $DvSwitchInfo | Get-VDPortgroup | Where-Object {$_.IsUplink -eq $false}
 
     foreach ($esxi in $ALLEsxis) {
